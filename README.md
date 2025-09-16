@@ -1,5 +1,71 @@
 # kedroEv1
 
+
+
+
+# 🎬 EV1 Machine Learning Project
+**Framework:** Kedro | **Lenguaje:** Python | **Entorno:** Jupyter
+
+---
+
+## 📋 Descripción del Proyecto
+Este proyecto implementa un flujo completo de Machine Learning utilizando el framework **Kedro**, siguiendo las primeras tres fases de la metodología **CRISP-DM**.  
+El objetivo es analizar y preparar datos transaccionales (clientes, productos y compras) para construir un dataset limpio, enriquecido y listo para modelado, aplicando **pipelines reproducibles** y **buenas prácticas de ingeniería de datos**.
+
+---
+
+## 🎯 Objetivos
+- Comprensión del negocio y definición de hipótesis.
+- Análisis exploratorio de datos (EDA).
+- Integración de múltiples fuentes (mínimo 3 datasets).
+- Limpieza y transformación de datos.
+- Feature engineering: creación de variables derivadas, ratios e interacciones.
+- Preparación de conjuntos `X_train`, `X_test`, `y_train`, `y_test` listos para modelado.
+
+---
+
+## 📊 Datasets
+- `customer.csv`: Información demográfica y de registro de clientes.
+- `product.csv`: Catálogo de productos con categoría y precio.
+- `purchase.csv`: Historial de compras con fechas y montos.
+
+> Los archivos deben colocarse en la carpeta `data/01_raw/`.
+
+---
+
+## 🚀 Instalación y Configuración
+
+### ✅ Prerrequisitos
+- Python 3.8+
+- Git
+- Kedro
+
+### ✅ Pasos
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/prxska/ev1ML.git
+cd ev1ML
+
+# 2. Crear y activar entorno virtual
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux/Mac
+source venv/bin/activate
+
+# 3. Instalar dependencias
+pip install -r requirements.txt
+
+# 4. Verificar instalación
+kedro info
+
+
+
+
+
+
+
+
 [![Powered by Kedro](https://img.shields.io/badge/powered_by-kedro-ffc900?logo=kedro)](https://kedro.org)
 
 ## Overview
