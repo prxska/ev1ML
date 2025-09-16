@@ -3,7 +3,7 @@
 
 
 
-# 🎬 EV1 Machine Learning Project
+#  EV1 Machine Learning Project
 **Framework:** Kedro | **Lenguaje:** Python | **Entorno:** Jupyter
 
 ---
