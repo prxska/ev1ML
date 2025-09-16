@@ -28,6 +28,9 @@ El objetivo es analizar y preparar datos transaccionales (clientes, productos y 
 - `customer.csv`: Información demográfica y de registro de clientes.
 - `product.csv`: Catálogo de productos con categoría y precio.
 - `purchase.csv`: Historial de compras con fechas y montos.
+  
+  Link de descarga del data set (Es estrictamente obligatorio que se usen los nombres de arriba. Han sido modificados.)
+- https://www.kaggle.com/datasets/svbstan/sales-product-and-customer-insight-repository
 
 > Los archivos deben colocarse en la carpeta `data/01_raw/`.
 
