@@ -1,0 +1,103 @@
+# === JOIN RULES ===
+params_join:
+  # join contra productos (ref)
+  ref:
+    enabled: true
+    how: left
+    left_on: product_id         # en purchase.csv
+    right_on: product_id        # en product.csv
+    suffix: "_ref"
+
+  # join contra clientes (supp)
+  supp:
+    enabled: true
+    how: left
+    left_on: customer_id        # en purchase.csv
+    right_on: customer_id       # en customer.csv
+    suffix: "_supp"
+
+# === FEATURE SPACES ===
+# Ajusta estas listas a tus columnas reales (no pasa nada si alguna falta).
+params_features:
+  id_columns:
+    - order_id                  # si no existe, elimínalo
+    - customer_id
+    - product_id
+
+  numeric_features:
+    - quantity
+    - price
+    - discount
+    - amount                    # o total_amount / revenue, según tu CSV
+    - cost                      # si existe en product.csv y se propagó en el merge
+
+  categorical_features:
+    - category                  # de product.csv
+    - brand                     # de product.csv
+    - country                   # de customer.csv
+    - gender                    # de customer.csv
+    - payment_method            # si existe en purchase.csv
+
+  datetime_features:
+    - purchase_date
+    - signup_date               # de customer.csv
+    - date_of_birth             # de customer.csv (útil para edad)
+
+  # deja vacío para usar la unión de las listas anteriores; si prefieres,
+  # puedes enumerar explícitamente las columnas finales del merge.
+  selected_columns: []
+
+  # objetivo para ML (ejemplo de regresión: monto gastado)
+  target: amount                # cambia si tu target se llama distinto
+
+# === CLEANING ===
+params_clean:
+  drop_duplicates: true
+  string_trim: true
+  missing:
+    add_missing_indicators: true
+    numeric_strategy: median        # median|mean|constant
+    numeric_constant: 0
+    categorical_strategy: most_frequent  # most_frequent|constant
+    categorical_constant: "desconocido"
+    datetime_strategy: constant
+    datetime_constant: "1970-01-01"
+  outliers:
+    method: iqr                     # iqr|zscore
+    factor: 1.5
+    clip: true
+
+# === FEATURE ENGINEERING ===
+params_fe:
+  # expandir componentes temporales (año, mes, etc.)
+  datetime_expand: true
+  datetime_features_to_expand:
+    - purchase_date
+    - signup_date
+
+  # ratios comunes
+  ratios:
+    - { name: "unit_price", numerator: "amount", denominator: "quantity" }
+
+  # interacciones
+  interactions:
+    - { name: "qty_x_discount", a: "quantity", b: "discount" }
+
+  # binning de gasto total (si existe)
+  bins:
+    - { col: "amount", n_bins: 5, encode: "ordinal" }
+
+  # columnas a eliminar después del FE (si molestan)
+  to_drop_after_fe: []
+
+# === SPLIT ===
+params_split:
+  test_size: 0.2
+  random_state: 42
+  stratify_by: ""                  # para clasificación, pon aquí la clase
+
+# === PREPROCESS ===
+params_preprocess:
+  scale_numeric: standard          # standard|minmax|none
+  onehot_handle_unknown: ignore
+  sparse: false

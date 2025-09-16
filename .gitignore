@@ -1,0 +1,27 @@
+# === Datos y credenciales ===
+data/
+conf/local/
+
+# === Logs y checkpoints ===
+*.log
+.ipynb_checkpoints/
+
+# === Cachés de Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# === Cachés de testing ===
+.pytest_cache/
+
+# === Documentación generada ===
+docs/build/
+
+# === Entornos virtuales ===
+venv/
+.env/
+
+# === Archivos de IDE ===
+.vscode/
+.idea/

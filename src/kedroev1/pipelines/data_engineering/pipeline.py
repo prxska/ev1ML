@@ -1,0 +1,94 @@
+# src/proyecto_ml/pipelines/data_engineering/pipeline.py
+from kedro.pipeline import Pipeline, node, pipeline
+from .nodes import (
+    integrate_datasets,
+    select_and_cast,
+    clean_data,
+    engineer_features,
+    split_data,
+    build_preprocessor,
+    transform_with_preprocessor,
+)
+
+
+def create_pipeline(**kwargs) -> Pipeline:
+    return pipeline(
+        [
+            node(
+                func=integrate_datasets,
+                inputs=dict(
+                    df_main="raw_main",
+                    df_ref="raw_reference",
+                    df_supp="raw_supplementary",
+                    params_join="params:params_join",
+                ),
+                outputs="intermediate_merged",
+                name="integrate_datasets_node",
+            ),
+            node(
+                func=select_and_cast,
+                inputs=dict(
+                    df="intermediate_merged",
+                    params_features="params:params_features",
+                ),
+                outputs="intermediate_selected",
+                name="select_and_cast_node",
+            ),
+            node(
+                func=clean_data,
+                inputs=dict(
+                    df="intermediate_selected",
+                    params_clean="params:params_clean",
+                    params_features="params:params_features",
+                ),
+                outputs="primary_clean",
+                name="clean_data_node",
+            ),
+            node(
+                func=engineer_features,
+                inputs=dict(
+                    df="primary_clean",
+                    params_fe="params:params_fe",
+                    params_features="params:params_features",
+                ),
+                outputs="feature_features",
+                name="engineer_features_node",
+            ),
+            node(
+                func=split_data,
+                inputs=dict(
+                    df="feature_features",
+                    params_split="params:params_split",
+                    params_features="params:params_features",
+                ),
+                outputs=["split_train_df", "split_test_df"],
+                name="split_data_node",
+            ),
+            node(
+                func=build_preprocessor,
+                inputs=dict(
+                    train_df="split_train_df",
+                    params_features="params:params_features",
+                    params_preprocess="params:params_preprocess",
+                ),
+                outputs="preprocessor",
+                name="build_preprocessor_node",
+            ),
+            node(
+                func=transform_with_preprocessor,
+                inputs=dict(
+                    train_df="split_train_df",
+                    test_df="split_test_df",
+                    preprocessor="preprocessor",
+                    params_features="params:params_features",
+                ),
+                outputs=[
+                    "model_input_X_train",
+                    "model_input_X_test",
+                    "model_input_y_train",
+                    "model_input_y_test",
+                ],
+                name="transform_with_preprocessor_node",
+            ),
+        ]
+    )
