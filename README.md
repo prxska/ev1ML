@@ -25,7 +25,7 @@ El objetivo es analizar y preparar datos transaccionales (clientes, productos y 
 ---
 ## Video del proyecto
 
-https://drive.google.com/file/d/1p3dwV0ZDF4vuGyhqHb0sTHfEOj1xR-QB/view?usp=sharing
+- https://drive.google.com/file/d/1p3dwV0ZDF4vuGyhqHb0sTHfEOj1xR-QB/view?usp=sharing
 ---
 ## 📊 Datasets
 - `customer.csv`: Información demográfica y de registro de clientes.
