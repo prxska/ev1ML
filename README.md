@@ -23,7 +23,10 @@ El objetivo es analizar y preparar datos transaccionales (clientes, productos y 
 - Preparación de conjuntos `X_train`, `X_test`, `y_train`, `y_test` listos para modelado.
 
 ---
+## Video del proyecto
 
+https://drive.google.com/file/d/1p3dwV0ZDF4vuGyhqHb0sTHfEOj1xR-QB/view?usp=sharing
+---
 ## 📊 Datasets
 - `customer.csv`: Información demográfica y de registro de clientes.
 - `product.csv`: Catálogo de productos con categoría y precio.
