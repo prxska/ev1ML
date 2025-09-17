@@ -62,11 +62,10 @@ pip install -r requirements.txt
 # 4. Verificar instalación
 kedro info
 
+----------------------------------
+# En caso de caso de querer tener una visualizacion interactiva
 
-
-
-
-
+kedro viz
 
 
 [![Powered by Kedro](https://img.shields.io/badge/powered_by-kedro-ffc900?logo=kedro)](https://kedro.org)
